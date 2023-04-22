@@ -1,5 +1,12 @@
 {
     "cSpell.words": [
         "WINDOWPOS"
-    ]
+    ],
+    "files.associations": {
+        "global.h": "c",
+        "render.h": "c",
+        "sdl.h": "c",
+        "linmath.h": "c",
+        "render_internal.h": "c"
+    }
 }

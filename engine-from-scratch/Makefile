@@ -7,7 +7,9 @@ SOURCES = $(shell find ./src -name "*.c")
 
 INC = \
 -I ../include \
--I ../linmath.h
+-I ../linmath.h \
+-I ./engine \
+-I ./engine/render
 
 LDFLAGS = 	$(shell pkg-config --libs sdl2) \
 		   	$(shell pkg-config --libs SDL2_mixer) \
@@ -24,14 +26,16 @@ CFLAGS = 	$(shell pkg-config --cflags sdl2) \
 CC = gcc
 
 all: $(BUILD_DIR)/$(TARGET)
+.PHONY: all
 
 OBJECTS = $(addprefix $(OBJECTS_DIR)/,$(notdir $(SOURCES:.c=.o)))
+vpath %.c $(sort $(dir $(SOURCES)))
 
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 	mkdir -p $(OBJECTS_DIR)
 
-$(OBJECTS_DIR)/%.o: ./src/%.c | $(BUILD_DIR)
+$(OBJECTS_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) -c $(CFLAGS) $< -o $@
 	@echo ""
 
