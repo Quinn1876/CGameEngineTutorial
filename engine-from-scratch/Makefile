@@ -4,6 +4,7 @@ BUILD_DIR = ./build
 OBJECTS_DIR = $(BUILD_DIR)/objs
 
 SOURCES = $(shell find ./src -name "*.c")
+HEADERS = $(shell find ./src -name "*.h")
 
 INC = \
 -I ../include \
@@ -21,7 +22,8 @@ CFLAGS = 	$(shell pkg-config --cflags sdl2) \
 			$(shell pkg-config --cflags SDL2_mixer) \
 			$(shell pkg-config --cflags freetype2) \
 			$(shell pkg-config --cflags opengl) \
-			$(INC)
+			$(INC) \
+			-ggdb
 
 CC = gcc
 
@@ -35,7 +37,7 @@ $(BUILD_DIR):
 	mkdir $(BUILD_DIR)
 	mkdir -p $(OBJECTS_DIR)
 
-$(OBJECTS_DIR)/%.o: %.c | $(BUILD_DIR)
+$(OBJECTS_DIR)/%.o: %.c $(HEADERS) | $(BUILD_DIR)
 	$(CC) -c $(CFLAGS) $< -o $@
 	@echo ""
 
