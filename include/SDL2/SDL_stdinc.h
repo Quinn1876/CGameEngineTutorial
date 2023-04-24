@@ -77,7 +77,7 @@
 # include <stdint.h>
 #endif
 #ifdef HAVE_CTYPE_H
-# include <ctype.h>
+# include <ctypes.h>
 #endif
 #ifdef HAVE_MATH_H
 # if defined(_MSC_VER)

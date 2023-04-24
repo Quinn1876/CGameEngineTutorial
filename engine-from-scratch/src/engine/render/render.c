@@ -1,5 +1,5 @@
 #include "../global.h"
-#include "render.h"
+#include "../render.h"
 #include "render_internal.h"
 
 static Render_State_Internal state = {0};

@@ -5,8 +5,8 @@
 #include <glad/glad.h>
 
 
-#include "../type.h"
-#include "render.h"
+#include "../types.h"
+#include "../render.h"
 
 typedef struct render_state_internal {
     u32 vao_quad;

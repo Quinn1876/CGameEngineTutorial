@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#include "../type.h"
+#include "../types.h"
 #include "../util.h"
-#include "io.h"
+#include "../io.h"
 
 /* 20 MiB, can probably change this to a higher value without issue */
 #define IO_READ_CHUNK_SIZE 2097152
@@ -70,10 +70,22 @@ File io_file_read(const char* path) {
     file.data = data;
     file.len = used;
     file.is_valid = true;
-
+    fclose(fp);
     return file;
 }
 
 int io_file_write(void *buffer, size_t size, const char *path) {
+    FILE *fp = fopen(path, "wb");
+    if (!fp || ferror(fp)) {
+        ERROR_RETURN(1, "Cannot write file: %s.\n", path);
+    }
 
+    size_t chunks_written = fwrite(buffer, size, 1, fp);
+
+    fclose(fp);
+    if (chunks_written != 1) {
+        ERROR_RETURN(1, "Write error. "
+                        "Expected 1 chunk, gpt %zu.\n", chunks_written);
+    }
+    return 0;
 }

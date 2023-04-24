@@ -14,16 +14,15 @@ INC = \
 
 LDFLAGS = 	$(shell pkg-config --libs sdl2) \
 		   	$(shell pkg-config --libs SDL2_mixer) \
-	      	$(shell pkg-config --libs freetype2) \
 	      	$(shell pkg-config --libs opengl) \
 			-ldl
 
 CFLAGS = 	$(shell pkg-config --cflags sdl2) \
 			$(shell pkg-config --cflags SDL2_mixer) \
-			$(shell pkg-config --cflags freetype2) \
 			$(shell pkg-config --cflags opengl) \
 			$(INC) \
-			-ggdb
+			-ggdb \
+			-Werror -Wall -Wextra
 
 CC = gcc
 
